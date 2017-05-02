@@ -1,0 +1,57 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+small{ font-size:12px; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+sup { vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; }
+
+.calender{
+	width:550px;
+	margin: 20px auto;
+	height:450px;
+	border:5px solid #5caeff;
+}
+.clearfix:after{
+	content:"";
+	display:table;
+	clear:both;
+}
+.calender_main{
+	float:left;
+	width:400px;
+}
+.calender_select{
+	margin:20px 0px;
+	width:350px;
+	text-align: center;
+}
+.select_year, .select_month{
+	padding:3px;
+	font-size:12px;
+	margin-left:10px;
+}
+.return_today_button{
+	display:inline-block;
+	/*border:1px solid cornflowerblue;*/
+	margin-left:10px;
+	padding:5px;
+	background-color: #5caeff;
+	color:#fff;
+	font-size:12px;
+	border-radius: 3px;
+}
+.calender_right{
+	float:left;
+	width:150px;
+	background-color: #5caeff;
+	height:100%;
+}
