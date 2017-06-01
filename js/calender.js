@@ -57,19 +57,44 @@ Calender.prototype = {
         });
         addEvent(document.querySelector(".select_month"),"change",function(){
         	year = document.querySelector(".select_year").value;
-        	month = document.querySelector(".select_month").value;
+        	month = document.querySelector(".select_month").value;  
         	self.getDateList(year,month,1);
         });
         addEvent(document.querySelector(".prev_month"),"click",function(){
-        	if(document.querySelector(".select_month").value == 1){
-        		document.querySelector(".select_year").value = document.querySelector(".select_year").value -1;
-        		document.querySelector(".select_month").value = 12;
+        	
+        	if(document.querySelector(".select_month").value == 0){        		
+        		document.querySelector(".select_month").value = 11;
+        		document.querySelector(".select_year").value = document.querySelector(".select_year").value - 1;
         	}else{
-        		document.querySelector(".select_month").value = document.querySelector(".select_month").value-1;}
+        		document.querySelector(".select_month").value = document.querySelector(".select_month").value - 1;
+        	}
         	year = document.querySelector(".select_year").value;
         	month = document.querySelector(".select_month").value;
         	self.getDateList(year,month,1);
         });
+
+        addEvent(document.querySelector(".next_month"),"click",function(){
+        	
+        	if(document.querySelector(".select_month").value == 11){        		
+        		document.querySelector(".select_month").value = 0;
+        		document.querySelector(".select_year").value = parseInt(document.querySelector(".select_year").value) + 1;
+        	}else{
+        		document.querySelector(".select_month").value = parseInt(document.querySelector(".select_month").value) + 1;
+        	}
+        	year = document.querySelector(".select_year").value;
+        	month = document.querySelector(".select_month").value;
+        	self.getDateList(year,month,1);
+        });
+
+        addEvent(document.querySelector(".return_today_button"),"click",function(){
+        	self.selectedDate = "";
+        	year = curDate.getFullYear();
+        	month = curDate.getMonth();
+        	document.querySelector(".select_year").value = year;
+        	document.querySelector(".select_month").value = month;
+        	self.getDateList(year,month,1);
+        });
+
     },
     fillSelect: function(year,month){
         for (var i = 0; i < 120; i++) {
@@ -119,6 +144,7 @@ Calender.prototype = {
             this.TFestival = "";            
         };
         this.DateList = [];
+
         var result = {};
         var index = -1;
         var ifestival_date,tfestival_date,item;
@@ -129,6 +155,12 @@ Calender.prototype = {
             dat.setTime(dat.getTime()-dat.getDay()*oneDaysec);
         }
         var date_temp = new Date();
+        console.log(this.selectedDate);
+        if(this.selectedDate == ""){
+        	this.selectedDate = date_temp.getFullYear() +"-"+ (parseInt(date_temp.getMonth())+1)  +"-"+ date_temp.getDate();
+        	console.log("lll")
+        }
+        console.log(this.selectedDate);
         for(var i=0; i<42; i++){
             var dateObj = new DateObjConstructor(dat);
             //console.log(dateObj);
@@ -247,11 +279,12 @@ Calender.prototype = {
                 }else{
                 	el = event.target.parentNode;
                 }
+                self.selectedDate = el.getAttribute("date");
                 if(hasClass(el,"prevnext")){
                 	var dateArr = el.getAttribute("date").split("-");
                 	document.querySelector(".select_year").value = dateArr[0];
                 	document.querySelector(".select_month").value = dateArr[1]-1;
-                	self.selectedDate = el.getAttribute("date");
+                	
                 	self.getDateList(dateArr[0],dateArr[1]-1,dateArr[2]);
                 }else{
             	    var selected_el = document.getElementsByClassName("selected")[0];
